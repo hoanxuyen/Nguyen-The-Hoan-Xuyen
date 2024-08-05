@@ -34,10 +34,6 @@ const renderInputGroup = (
 export default function CurrencyForm() {
   const [currencyList, setCurrencyList] = useState<CurrencyConfig[]>([]);
   const methods = useForm<FormValues>({
-    defaultValues: {
-      amountToSend: 0,
-      amountToReceive: 0,
-    },
     mode: "onChange",
   });
   const { setValue, watch } = methods;
@@ -90,7 +86,9 @@ export default function CurrencyForm() {
   const amountToReceive = watch("amountToReceive");
   // Recalculate the amount to receive whenever the currencies or amount to send change
   useEffect(() => {
-    calculateAmountToReceive(amountToSend);
+    if (amountToSend) {
+      calculateAmountToReceive(amountToSend);
+    }
   }, [currencyToSend, currencyToReceive, amountToSend]);
 
   const handleSwap = () => {
