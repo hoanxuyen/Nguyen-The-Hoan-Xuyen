@@ -1,10 +1,10 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { API_BASE} from "../AppUtil";
-import DropdownButton from "./DropdownButton";
-import NumberInput from "./NumberInput";
-import { CurrencyConfig } from "../types";
+import { API_BASE } from "../AppUtil";
 import CurrenciesRateInfo from "./CurrenciesRateInfo";
+import { CurrencyConfig } from "../types";
+import NumberInput from "./NumberInput";
+import DropdownButton from "./DropdownButton";
 type FormValues = {
   currencyToSend: CurrencyConfig;
   currencyToReceive: CurrencyConfig;
