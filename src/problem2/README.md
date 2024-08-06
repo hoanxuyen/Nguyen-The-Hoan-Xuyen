@@ -1,3 +1,5 @@
+## Demo 
+You can visit the demo at https://nguyen-the-hoan-xuyen-h5c7.vercel.app/
 ## Getting Started
 
 This guide will help you set up and run the project locally.
@@ -11,7 +13,7 @@ This guide will help you set up and run the project locally.
 1. Clone the repository:
 
    ```bash
-   git clone [https://your-github-repo.com/problem2-react.git](https://your-github-repo.com/problem2-react.git)
+   git clone [https://github.com/hoanxuyen/Nguyen-The-Hoan-Xuyen.git]
    ```
 
 2. Navigate to the project directory:
