@@ -1,12 +1,14 @@
-## Demo 
+## Demo
+
 You can visit the demo at https://nguyen-the-hoan-xuyen-h5c7.vercel.app/
+
 ## Getting Started
 
 This guide will help you set up and run the project locally.
 
 ### Prerequisites
 
-- Node.js and npm (or yarn) installed.
+- Node.js and npm (or bun) installed.
 
 ### Installation
 
@@ -19,7 +21,7 @@ This guide will help you set up and run the project locally.
 2. Navigate to the project directory:
 
 ```bash
-cd problem2-react
+cd problem2
 ```
 
 3. Install dependencies:
@@ -34,6 +36,18 @@ To start the development server:
 
 ```bash
 bun dev
+```
+
+To check code style and potential errors:
+
+```bash
+bun run lint
+```
+
+To build the application for production:
+
+```bash
+bun run build
 ```
 
 ### Additional Information:

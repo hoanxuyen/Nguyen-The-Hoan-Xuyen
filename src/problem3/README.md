@@ -84,7 +84,7 @@ const WalletPage: React.FC<Props> = (props: Props) => {
 };
 ```
 
-## Isues
+## Issues
 
 1. Type safety
    You should avoid using `any` as type. `blockchain` can be `string` here.
@@ -117,13 +117,13 @@ const getPriority = (blockchain: any): number => {
    The variable `lhsPriority` is used but not defined. Should use BalancePriority instead.
 
 4. Missing interface.
-   `blockchain` field is missing from `WalletBalance` interface.
+   In your original code, the `WalletBalance` interface didn't include a field for blockchain. This creates potential type errors because the `getPriority` function expects a string for `blockchain`, but the interface doesn't enforce that type.
 
 5. Duplicate interface
    `WalletBalance` and `FormattedWalletBalance` is almost identical, it should be extends from one to another.
 
 6. `sort()` function missing condition `a = b`.
-   You have created two scenarios if the rightPriority was greater than or less than leftPriority. It's would be best if you use `rightPriority - leftPriority` to get the sorting order.
+   The sort function within `useMemo` only handled cases where `leftPriority` (priority of the left element) is greater or less than `rightPriority` (priority of the right element). It didn't explicitly handle the scenario where they might be equal.This could lead to unexpected behavior in sorting if two elements have the same priority. The default sorting behavior in JavaScript might not be consistent when elements have equal values.
    ```js
    const sortedBalances = useMemo(() => {
      return balances
@@ -160,7 +160,7 @@ const formattedBalances = sortedBalances.map((balance: WalletBalance) => {
 The `sortedBalances` is mapped to `formattedBalances` but not used.
 
 7. Formatting `amount` correctly.
-   Use a proper formatting method, such as `toFixed(2)`, for better numerical representation. If you use `toFixed()`, it just rounded up number.
+   Using `.toFix(2)` to format the amount. When you using `.toFix()` without the argument it will round up the number, for example 123,456.7889.toFix() will become 123,456. Since we doing with currencies it would be good if we provide an argument to make it mor percise. For example 123,456.7889.toFix(2) would be 123,456.78
 
 ## Refactored
 
@@ -173,9 +173,10 @@ interface WalletBalance {
 interface FormattedWalletBalance extends WalletBallance {
   formatted: string;
 }
-interface Props extends BoxProps {}
 
-const WalletPage: React.FC<Props> = (props) => {
+// Removed the custom Props interface since it was not contributing anything meaningful. Directly used BoxProps in the React.FC<BoxProps> type.
+const WalletPage: React.FC<BoxProps> = (props) => {
+  // Since
   const { children, ...rest } = props;
   const balances = useWalletBalances();
   const prices = usePrices();
@@ -225,7 +226,7 @@ const WalletPage: React.FC<Props> = (props) => {
           />
         );
       })}
-      {children} {/**allows any child components or elements passed to WalletPage to be rendered within the div. */}
+      {children} {/**The children prop is included in the destructuing of props and not using it any elsewhere. I rendered it here to allows any child components or elements passed to WalletPage to be rendered within the div. */}
     </div>
   );
 };
